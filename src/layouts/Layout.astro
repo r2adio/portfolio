@@ -1,5 +1,7 @@
 ---
 import "@styles/global.css";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
 ---
 
 <!doctype html>
@@ -10,10 +12,14 @@ import "@styles/global.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>Portfolio</title>
   </head>
   <body>
-    <slot />
+    <div class="max-w-screen overflow-x-hidden px-2">
+      <Header />
+      <slot />
+      <Footer />
+    </div>
   </body>
 </html>
 
@@ -21,7 +27,12 @@ import "@styles/global.css";
   html,
   body {
     margin: 0;
-    width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
   }
 </style>

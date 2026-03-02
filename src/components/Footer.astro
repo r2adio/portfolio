@@ -1,0 +1,137 @@
+---
+const SOURCE_CODE_GITHUB_URL = "https://github.com/r2adio/portfolio";
+const SITE_INFO = { url: "https://example.com" };
+import { RssIcon } from "lucide-react";
+---
+
+<footer class="max-w-screen overflow-x-hidden px-2">
+  <div
+    class="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-3xl"
+  >
+    <p
+      class="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground"
+    >
+      Inspired by tailwindcss.com & ui.shadcn.com
+    </p>
+
+    <p
+      class="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground"
+    >
+      Built by{" "}
+      <a href="https://x.com/zeke_r2" target="_blank"> r2adio. </a>
+      The source code is available on{" "}
+      <a
+        class="link"
+        href={SOURCE_CODE_GITHUB_URL}
+        target="_blank"
+        rel="noopener"
+      >
+        GitHub
+      </a>
+      .
+    </p>
+
+    <div
+      class="screen-line-before flex justify-center gap-2 py-3 font-mono text-xs text-muted-foreground sm:hidden"
+    >
+      <a class="font-medium" href="/sponsors">Sponsors</a>
+
+      <span class="opacity-50">•</span>
+      <a
+        class="font-medium"
+        href={`${SITE_INFO.url}/llms.txt`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        llms.txt
+      </a>
+    </div>
+
+    <div
+      class="screen-line-before screen-line-after flex w-full before:z-1 after:z-1"
+    >
+      <div
+        class="mx-auto flex items-center justify-center gap-3 border-x border-edge bg-background px-4"
+      >
+        <a
+          class="flex font-mono text-xs font-medium text-muted-foreground max-sm:hidden"
+          href="/sponsors"
+        >
+          Sponsors
+        </a>
+
+        <!-- <Separator /> -->
+
+        <a
+          class="flex font-mono text-xs font-medium text-muted-foreground max-sm:hidden"
+          href={`${SITE_INFO.url}/llms.txt`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          llms.txt
+        </a>
+
+        <!-- <Separator /> -->
+
+        <a
+          class="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+          href="https://x.com/zeke_r2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <!-- <Icons.x /> -->
+          <span class="sr-only">X</span>
+        </a>
+
+        <!-- <Separator /> -->
+
+        <a
+          class="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+          href="https://github.com/r2adio"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <!-- <Icons.github /> -->
+          <span class="sr-only">GitHub</span>
+        </a>
+
+        <!-- <Separator /> -->
+
+        <a
+          class="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+          href="https://www.linkedin.com/in/gaurav-vashisth-758062353"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <!-- <Icons.linkedin /> -->
+          <span class="sr-only">LinkedIn</span>
+        </a>
+
+        <!-- <Separator /> -->
+
+        <a
+          class="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+          href={`${SITE_INFO.url}/rss`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <RssIcon />
+          <span class="sr-only">RSS</span>
+        </a>
+
+        <!-- <Separator /> -->
+
+        <a
+          class="flex text-muted-foreground transition-colors hover:text-foreground"
+          href={process.env.PUBLIC_DMCA_URL ||
+            "https://www.dmca.com/ProtectionPro.aspx"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <!-- <Icons.dmca /> -->
+          <span class="sr-only">DMCA.com Protection Status</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
