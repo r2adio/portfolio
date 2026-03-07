@@ -1,9 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+
+// add github_token to authenticate -> higher rate limit
+const githubStars = await fetch("https://api.github.com/repos/r2adio/portfolio")
+  .then(async (r) => {
+    if (!r.ok) return "N/A"; // rate limit or other error
+    const d = await r.json();
+    return d.stargazers_count ?? "N/A";
+  })
+  .catch(() => "N/A");
+
+const theme = Math.random() > 0.5 ? "light" : "dark";
+---
+
 <header>
-  <div class="flex justify-center p-4 gap-4">
-    <div>Portfolio</div>
-    <div>Blog</div>
-    <div>cmd+k</div>
-    <div>github</div>
-    <div>mode</div>
+  <div
+    class="screen-line-before screen-line-after mx-auto flex h-12 items-center justify-between gap-2 border-x border-edge px-2 after:z-1 after:transition-[background-color] sm:gap-4 md:max-w-3xl font-mono"
+  >
+    <Icon name="r2-mark" class="h-14 w-auto" title="r2adio" />
+    <div class="flex items-end gap-4 text-sm">
+      <div>Home</div>
+      <div>Blog</div>
+
+      <div>cmd + k</div>
+
+      <button
+        ><div class="flex gap-2">
+          <Icon name="github" class="h-5 w-auto" />
+          <span class="text-muted-foreground">{githubStars}</span>
+        </div>
+      </button>
+
+      <button class="border-l-2 border-edge pl-2"
+        ><Icon name={theme} class="h-5 w-auto" />
+      </button>
+    </div>
   </div>
 </header>

@@ -9,4 +9,5 @@ import react from "@astrojs/react";
 export default defineConfig({
   vite: { plugins: [tailwindcss()] },
   integrations: [react(), icon()],
+  server: { port: 42069 },
 });
