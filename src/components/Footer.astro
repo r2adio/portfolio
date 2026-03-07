@@ -4,7 +4,7 @@ const SITE_INFO = { url: "https://example.com" };
 import { Icon } from "astro-icon/components";
 ---
 
-<footer class="max-w-screen overflow-x-hidden px-2">
+<footer class="overflow-x-hidden px-2">
   <div class="screen-line-before mx-auto pt-4 md:max-w-3xl">
     <p
       class="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground"
@@ -16,17 +16,16 @@ import { Icon } from "astro-icon/components";
       class="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground"
     >
       Built by{" "}
-      <a href="https://x.com/zeke_r2" target="_blank"> r2adio. </a>
-      The source code is available on{" "}
+      <a class="link" href="https://x.com/zeke_r2" target="_blank"> r2adio</a>.
+      The source code is available on
       <a
         class="link"
         href={SOURCE_CODE_GITHUB_URL}
         target="_blank"
         rel="noopener"
       >
-        GitHub
-      </a>
-      .
+        GitHub</a
+      >.
     </p>
   </div>
 
@@ -54,8 +53,6 @@ import { Icon } from "astro-icon/components";
         Sponsors
       </a>
 
-      <!-- <Separator /> -->
-
       <a
         class="flex font-mono text-xs font-medium text-muted-foreground max-sm:hidden hover:text-white"
         href={`${SITE_INFO.url}/llms.txt`}
@@ -65,19 +62,15 @@ import { Icon } from "astro-icon/components";
         llms.txt
       </a>
 
-      <!-- <Separator /> -->
-
       <a
         class="flex items-center text-muted-foreground transition-colors hover:text-white"
         href="https://x.com/zeke_r2"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Icon name="x" class="h-5 w-5" title="X" />
+        <Icon name="x" class="h-5 w-auto" title="X" />
         <span class="sr-only">X</span>
       </a>
-
-      <!-- <Separator /> -->
 
       <a
         class="flex items-center text-muted-foreground transition-colors hover:text-white"
@@ -85,11 +78,9 @@ import { Icon } from "astro-icon/components";
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Icon name="github" class="h-5 w-5" title="X" />
+        <Icon name="github" class="h-5 w-auto" title="X" />
         <span class="sr-only">GitHub</span>
       </a>
-
-      <!-- <Separator /> -->
 
       <a
         class="flex items-center text-muted-foreground transition-colors hover:text-white"
@@ -97,11 +88,9 @@ import { Icon } from "astro-icon/components";
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Icon name="linkedin" class="h-5 w-5" title="LinkedIn" />
+        <Icon name="linkedin" class="h-5 w-auto" title="LinkedIn" />
         <span class="sr-only">LinkedIn</span>
       </a>
-
-      <!-- <Separator /> -->
 
       <a
         class="flex items-center text-muted-foreground transition-colors hover:text-white"
@@ -109,20 +98,18 @@ import { Icon } from "astro-icon/components";
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Icon name="rss" class="h-4.5 w-auto" title="RSS" />
+        <Icon name="rss" class="h-5 w-auto" title="RSS" />
         <span class="sr-only">RSS</span>
       </a>
 
-      <!-- <Separator /> -->
-
       <a
         class="flex text-muted-foreground transition-colors hover:text-white"
-        href={process.env.PUBLIC_DMCA_URL ||
+        href={import.meta.env.PUBLIC_DMCA_URL ||
           "https://www.dmca.com/ProtectionPro.aspx"}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Icon name="dmca" class="h-4.5 w-auto" title="DMCA" />
+        <Icon name="dmca" class="h-5 w-auto" title="DMCA" />
         <span class="sr-only">DMCA.com Protection Status</span>
       </a>
     </div>
