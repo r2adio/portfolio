@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@components/ui/button";
 import {
   Command,
   CommandDialog,
@@ -11,29 +10,60 @@ import {
   CommandItem,
   CommandList,
 } from "@components/ui/command";
-import { CommandIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 export function CommandMenu() {
   const [open, setOpen] = React.useState(false);
 
+  React.useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
+
   return (
-    <div className="flex flex-col gap-4">
-      <Button onClick={() => setOpen(true)} variant="outline" className="w-fit">
-        <CommandIcon />
-      </Button>
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="flex items-center gap-1.5 text-sm"
+      >
+        <SearchIcon className="h-4 w-4" />
+        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+          <span className="text-xs">⌘</span>K
+        </kbd>
+      </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
-          <CommandInput placeholder="Type a command or search..." />
+          <CommandInput placeholder="Type to search..." />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
-            <CommandGroup heading="Suggestions">
-              <CommandItem>Calendar</CommandItem>
-              <CommandItem>Search Emoji</CommandItem>
-              <CommandItem>Calculator</CommandItem>
+            <CommandGroup heading="Navigation">
+              <CommandItem
+                onSelect={() => {
+                  window.location.href = "/";
+                  setOpen(false);
+                }}
+              >
+                Home
+              </CommandItem>
+              <CommandItem
+                onSelect={() => {
+                  window.location.href = "/blog";
+                  setOpen(false);
+                }}
+              >
+                Blog
+              </CommandItem>
             </CommandGroup>
           </CommandList>
         </Command>
       </CommandDialog>
-    </div>
+    </>
   );
 }
