@@ -2,6 +2,10 @@
 import { CommandMenu } from "@components/CommandMenu";
 import { Icon } from "astro-icon/components";
 
+interface Props {
+  theme: "light" | "dark";
+}
+
 // add github_token to authenticate -> higher rate limit
 const githubStars = await fetch("https://api.github.com/repos/r2adio/portfolio")
   .then(async (r) => {
@@ -11,7 +15,9 @@ const githubStars = await fetch("https://api.github.com/repos/r2adio/portfolio")
   })
   .catch(() => "N/A");
 
-const theme = Math.random() > 0.5 ? "light" : "dark";
+// dark -> moon, light -> sun
+const isDark = Astro.props.theme === "dark";
+const iconName = isDark ? "dark" : "light";
 ---
 
 <header>
@@ -23,7 +29,6 @@ const theme = Math.random() > 0.5 ? "light" : "dark";
       <div>Home</div>
       <div>Blog</div>
 
-      <!-- <div>cmd + k</div> -->
       <CommandMenu client:load />
 
       <button
@@ -34,7 +39,7 @@ const theme = Math.random() > 0.5 ? "light" : "dark";
       </button>
 
       <button class="border-l-2 border-edge pl-2"
-        ><Icon name={theme} class="h-5 w-auto" />
+        ><Icon name={iconName} class="h-5 w-auto" />
       </button>
     </div>
   </div>
