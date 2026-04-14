@@ -8,8 +8,9 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"postbuild": "pagefind --site dist",
-		"deploy": "npm run build && npm run postbuild && npx wrangler pages deploy dist --project-name portfolio",
+		"deploy": "npm run build && npx wrangler pages deploy dist --project-name portfolio",
 		"preview": "astro preview",
+		"preview:wrangler": "npm run build && npx wrangler pages dev dist",
 		"check": "astro check && biome check",
 		"lint": "biome check --write",
 		"format": "prettier -w . --cache"
@@ -61,7 +62,11 @@
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild", "sharp"],
-		"overrides": { "sharp": "^0.34.5" }
+		"overrides": {
+			"sharp": "^0.34.5"
+		}
 	},
-	"overrides": { "sharp": "^0.34.5" }
+	"overrides": {
+		"sharp": "^0.34.5"
+	}
 }
