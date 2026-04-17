@@ -8,9 +8,7 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"postbuild": "pagefind --site dist",
-		"deploy": "npm run build && npx wrangler pages deploy dist --project-name portfolio",
 		"preview": "astro preview",
-		"preview:wrangler": "npm run build && npx wrangler pages dev dist",
 		"check": "astro check && biome check",
 		"lint": "biome check --write",
 		"format": "prettier -w . --cache"
@@ -57,14 +55,8 @@
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"reading-time": "^1.5.0",
-		"typescript": "^6.0.2",
+		"typescript": "^5.9.3",
 		"wrangler": "^4.83.0"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild", "sharp"],
-		"overrides": {
-			"sharp": "^0.34.5"
-		}
 	},
 	"overrides": {
 		"sharp": "^0.34.5"
