@@ -22,9 +22,7 @@ import { expressiveCodeOptions, siteConfig } from "./src/site.config";
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.url,
-	image: {
-		domains: ["webmention.io"],
-	},
+	image: { domains: ["webmention.io"] },
 	integrations: [
 		expressiveCode(expressiveCodeOptions),
 		icon(),
@@ -34,7 +32,7 @@ export default defineConfig({
 		webmanifest({
 			// See: https://github.com/alextim/astro-lib/blob/main/packages/astro-webmanifest/README.md
 			name: siteConfig.title,
-			short_name: "Astro_Cactus", // optional
+			short_name: "Gaurav",
 			description: siteConfig.description,
 			lang: siteConfig.lang,
 			icon: "public/icon.svg", // the source for generating favicon & icons
@@ -56,8 +54,8 @@ export default defineConfig({
 				},
 			],
 			start_url: "/",
-			background_color: "#1d1f21",
-			theme_color: "#2bbc8a",
+			background_color: "#0000000", // app launch bg while app loads
+			theme_color: "#ffffff", // browser ui tint
 			display: "standalone",
 			config: {
 				insertFaviconLinks: false,
