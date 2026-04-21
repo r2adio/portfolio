@@ -41,4 +41,30 @@
 
 	// listen for prefers-color-scheme change.
 	lightModePref.addEventListener("change", (e) => setTheme(e.matches ? "light" : "dark"));
+
+  // theme toggle hotkey: `d`/`D`
+	// disables hotkey while typing in inputs/textareas/contenteditable.
+	if (!("__themeHotkeyInstalled" in window)) {
+		// @ts-expect-error attach a simple global flag
+		window.__themeHotkeyInstalled = true;
+		window.addEventListener("keydown", (e) => {
+			if (e.repeat) return;
+
+			const el = document.activeElement;
+			const typing =
+				el &&
+				((el instanceof HTMLInputElement) ||
+					(el instanceof HTMLTextAreaElement) ||
+					(el instanceof HTMLElement && el.isContentEditable));
+			if (typing) return;
+			// avoid clobbering other shortcuts (eg. Cmd+D bookmark)
+			if (e.ctrlKey || e.metaKey || e.altKey) return;
+			if (e.key.toLowerCase() !== "d") return;
+
+			e.preventDefault();
+			const cur = document.documentElement.getAttribute("data-theme") || "light";
+			const next = cur === "dark" ? "light" : "dark";
+			document.dispatchEvent(new CustomEvent("theme-change", { detail: { theme: next } }));
+		});
+	}
 </script>

@@ -80,6 +80,11 @@
 					// set the aria-checked attribute
 					button.setAttribute("aria-checked", String(rootInDarkMode()));
 				});
+
+				// If theme changes outside of this component (eg. hotkey), keep switch state in sync.
+				document.addEventListener("theme-change", () => {
+					button.setAttribute("aria-checked", String(rootInDarkMode()));
+				});
 			} else {
 				console.warn("Theme Toggle: No button found");
 			}
