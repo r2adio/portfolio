@@ -54,8 +54,8 @@ export default defineConfig({
 				},
 			],
 			start_url: "/",
-			background_color: "#0000000", // app launch bg while app loads
-			theme_color: "#ffffff", // browser ui tint
+			background_color: "#1d1f21", // app launch bg while app loads
+			theme_color: "#2bbc8a", // browser ui tint
 			display: "standalone",
 			config: {
 				insertFaviconLinks: false,
