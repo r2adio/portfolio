@@ -38,7 +38,7 @@ import { siteConfig } from "../../site.config";
 		</a>
 		<nav
 			aria-label="Main menu"
-			class="bg-global-bg absolute -inset-x-4 top-12 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:bg-transparent sm:p-0"
+			class="bg-global-bg absolute -inset-x-4 top-12 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-dashed sm:divide-accent sm:divide-y-0 sm:bg-transparent sm:p-0"
 			id="navigation-menu"
 		>
 			{
@@ -67,7 +67,7 @@ import { siteConfig } from "../../site.config";
 			<span class="sr-only">Open main menu</span>
 			<svg
 				aria-hidden="true"
-				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+				class="absolute inset-s-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
 				fill="none"
 				focusable="false"
 				id="line-svg"
@@ -81,7 +81,7 @@ import { siteConfig } from "../../site.config";
 			</svg>
 			<svg
 				aria-hidden="true"
-				class="text-accent absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
+				class="text-accent absolute inset-s-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
 				class="text-accent"
 				fill="none"
 				focusable="false"
