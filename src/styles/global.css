@@ -14,170 +14,190 @@
 }
 
 @import "tailwindcss";
-/* tailwind to ignore satori generated og-image */
 @source not "../pages/og-image";
-/* config for tailwindcss-typography plugin */
 @config "../../tailwind.config.ts";
+@plugin "@tailwindcss/typography";
 
-/* use a selector-based strategy for dark mode */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
-/* register custom colour properties */
-@property --color-global-bg {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #121113;
-}
-@property --color-global-text {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #ffffff;
-}
-@property --color-muted {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #6b7280;
-}
-@property --color-link {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #ffffff;
-}
-@property --color-accent {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #ffffff;
-}
-@property --color-accent-2 {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #ffffff;
-}
-@property --color-quote {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: #ffffff;
-}
-
-/* you could refactor below to use light-dark(), depending on your target audience */
 @theme {
-	--color-global-bg: #121113;
-	--color-global-text: #ffffff;
+	--color-bgColor: var(--theme-bg);
+	--color-textColor: var(--theme-text);
+	--color-link: var(--theme-link);
+	--color-accent: var(--theme-accent);
+	--color-accent-2: var(--theme-accent-2);
+	--color-global-bg: var(--theme-bg);
+	--color-global-text: var(--theme-text);
 	--color-muted: #6b7280;
-	--color-link: #ffffff;
-	--color-accent: #ffffff;
-	--color-accent-2: #ffffff;
-	--color-quote: #ffffff;
+	--color-quote: var(--theme-quote);
+
+	--font-sans:
+		"Commit Mono", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+	--animate-fade-in: fadeIn 1s ease-in forwards;
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
 }
 
 @layer base {
-		html {
-			color-scheme: light dark;
-			accent-color: var(--color-accent);
-			scrollbar-gutter: stable;
-
-		&[data-theme="light"] {
-			color-scheme: light;
-		}
-
-		&[data-theme="dark"] {
-			color-scheme: dark;
-			--color-global-bg: #121113;
-			--color-global-text: #ffffff;
-			--color-muted: #6b7280;
-			--color-link: #ffffff;
-			--color-accent: #ffffff;
-			--color-accent-2: #ffffff;
-			--color-quote: #ffffff;
-		}
-
-		--color-mode-transition-duration: 300ms;
-		--color-mode-transition-easing: ease-in-out;
-
-		transition:
-			--color-global-bg var(--color-mode-transition-duration) var(--color-mode-transition-easing),
-			--color-global-text var(--color-mode-transition-duration) var(--color-mode-transition-easing),
-			--color-muted var(--color-mode-transition-duration) var(--color-mode-transition-easing),
-			--color-link var(--color-mode-transition-duration) var(--color-mode-transition-easing),
-			--color-accent var(--color-mode-transition-duration) var(--color-mode-transition-easing),
-			--color-accent-2 var(--color-mode-transition-duration) var(--color-mode-transition-easing),
-			--color-quote var(--color-mode-transition-duration) var(--color-mode-transition-easing);
+	:root {
+		color-scheme: light;
+		--theme-bg: #121113;
+		--theme-link: #ffffff;
+		--theme-text: #ffffff;
+		--theme-accent: #ffffff;
+		--theme-accent-2: #ffffff;
+		--theme-quote: #ffffff;
+		--theme-menu-bg: rgb(0, 0, 0 / 0.85);
 	}
 
-	:target {
-		scroll-margin-block: 5ex;
+	:root.dark {
+		color-scheme: dark;
+		--theme-bg: #121113;
+		--theme-link: #ffffff;
+		--theme-text: #ffffff;
+		--theme-accent: #ffffff;
+		--theme-accent-2: #ffffff;
+		--theme-quote: #ffffff;
+		--theme-menu-bg: rgb(0, 0, 0 / 0.85);
 	}
 
-	@view-transition {
-		navigation: auto;
+	html {
+		@apply h-full scroll-smooth border-t-2 border-textColor bg-[#121113];
 	}
 
-	/* Astro image responsive styles, modified from -> https://docs.astro.build/en/guides/images/#responsive-image-styles */
-	:where([data-astro-image]) {
-		object-fit: var(--fit);
-		object-position: var(--pos);
-	}
-	[data-astro-image="full-width"] {
-		width: 100%;
-	}
-	[data-astro-image="constrained"] {
-		max-width: 100%;
+	html body {
+		@apply mx-auto flex h-full max-w-3xl flex-col bg-[#121113] px-4 pt-16 font-sans text-sm font-normal text-textColor antialiased;
 	}
 
-	body {
-		font-family: "Commit Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-			"Liberation Mono", "Courier New", monospace;
-		color: var(--color-global-text);
-		background: var(--color-global-bg);
+	::-webkit-scrollbar {
+		width: 10px;
 	}
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		color: var(--color-accent-2);
-		font-family: "Commit Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-			"Liberation Mono", "Courier New", monospace;
+	::-webkit-scrollbar-track {
+		background: #121113;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #121113;
+		border-radius: 10px;
 	}
 }
 
 @layer components {
 	@import "./components/admonition.css";
 	@import "./components/github-card.css";
+}
 
-	.cactus-link {
-		@apply bg-[size:100%_6px] bg-bottom bg-repeat-x;
+@utility style-link {
+	background-size: 100% 6px;
+	background-position: bottom;
+	background-repeat: repeat-x;
+	background-image: linear-gradient(
+		transparent,
+		transparent 5px,
+		var(--theme-text) 5px,
+		var(--theme-text)
+	);
+	&:hover {
 		background-image: linear-gradient(
 			transparent,
-			transparent 5px,
-			var(--color-global-text) 5px,
-			var(--color-global-text)
+			transparent 4px,
+			var(--theme-link) 4px,
+			var(--theme-link)
 		);
-		&:hover {
-			background-image: linear-gradient(
-				transparent,
-				transparent 4px,
-				var(--color-link) 4px,
-				var(--color-link)
-			);
-		}
-	}
-
-	.title {
-		@apply text-accent-2 text-2xl font-semibold;
 	}
 }
 
-@utility prose {
-	--tw-prose-body: var(--color-global-text);
-	--tw-prose-bold: var(--color-global-text);
-	--tw-prose-bullets: var(--color-global-text);
-	--tw-prose-code: var(--color-global-text);
-	--tw-prose-headings: var(--color-accent-2);
-	--tw-prose-hr: 0.5px dashed #666;
-	--tw-prose-links: var(--color-global-text);
-	--tw-prose-quotes: var(--color-quote);
+@utility title {
+	@apply text-2xl font-semibold text-accent-2;
+}
+
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	background-size: 100% 6px;
+	background-position: bottom;
+	background-repeat: repeat-x;
+	background-image: linear-gradient(
+		transparent,
+		transparent 5px,
+		var(--theme-text) 5px,
+		var(--theme-text)
+	);
+	text-decoration: none;
+}
+.prose
+	:where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+	background-image: linear-gradient(
+		transparent,
+		transparent 4px,
+		var(--theme-link) 4px,
+		var(--theme-link)
+	);
+}
+.prose
+	:where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	font-weight: 700;
+}
+.prose
+	:where(code):not(
+		:where(pre code, [class~="not-prose"], [class~="not-prose"] *)
+	) {
+	border: 1px dotted #666;
+	border-radius: 2px;
+}
+.prose
+	:where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	border-left-width: 4px;
+	border-left-color: var(--color-zinc-500);
+}
+.prose :where(hr):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	border-top-style: dashed;
+}
+.prose :where(table):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	border-collapse: collapse;
+	border: 1px solid #666;
+}
+.prose :where(thead):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	border-bottom: 1px solid #666;
+}
+.prose
+	:where(thead th):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	font-weight: 700;
+	border: 1px solid #666;
+	padding: 0.5em 0.75em;
+}
+.prose
+	:where(tbody tr):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	border-bottom: 1px solid #666;
+}
+.prose
+	:where(tbody td):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	border: 1px solid #666;
+	padding: 0.5em 0.75em;
+}
+.prose :where(tfoot):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	border-top: 1px solid #666;
+}
+.prose-sm
+	:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+	font-size: 0.875rem;
+	font-weight: 400;
+}
+.prose-cactus {
+	--tw-prose-body: var(--theme-text);
+	--tw-prose-headings: var(--theme-accent-2);
+	--tw-prose-links: var(--theme-text);
+	--tw-prose-bold: var(--theme-text);
+	--tw-prose-bullets: var(--theme-text);
+	--tw-prose-quotes: var(--theme-quote);
+	--tw-prose-code: var(--theme-text);
 	--tw-prose-th-borders: #666;
 }

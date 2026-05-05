@@ -5,48 +5,49 @@ import { menuLinks } from "@/site.config";
 import { siteConfig } from "../../site.config";
 ---
 
-<header class="group relative mb-28 flex items-center sm:ps-18" id="main-header">
-	<div class="flex sm:flex-col">
+<header class="relative mb-14 flex items-center" id="main-header">
+	<div class="flex-1">
 		<a
 			aria-current={Astro.url.pathname === "/" ? "page" : false}
-			class="inline-flex items-center sm:relative sm:inline-block sm:grayscale sm:hover:filter-none"
+			class="mb-4 inline-flex items-center"
 			href="/"
 		>
 			<svg
 				aria-hidden="true"
-				class="me-3 h-10 w-6 sm:absolute sm:-start-18 sm:me-0 sm:h-20 sm:w-12"
+				class="mr-3 h-10 w-6 sm:w-10"
 				fill="none"
 				focusable="false"
 				viewBox="0 0 272 480"
 				xmlns="http://www.w3.org/2000/svg"
 			>
-        <title>my logo</title>
-        <g transform="translate(-56 0) scale(0.600)">
-          <path
-          fill="currentColor"
-          d="M96 192h64v256H96z
-             M160 192h96v64h-96z
-             M256 256h64v64h-64z
-             M352 192h192v64H352z
-             M480 256h64v64h-64z
-             M416 320h64v64h-64z
-             M352 384h192v64H352z"
-          />
-        </g>
+				<title>my logo</title>
+				<g transform="translate(-56 0) scale(0.600)">
+					<path
+						fill="currentColor"
+						d="M96 192h64v256H96z
+						 M160 192h96v64h-96z
+						 M256 256h64v64h-64z
+						 M352 192h192v64H352z
+						 M480 256h64v64h-64z
+						 M416 320h64v64h-64z
+						 M352 384h192v64H352z"
+					/>
+				</g>
 			</svg>
-			<span class="text-xl font-bold sm:text-2xl">{siteConfig.title}</span>
+			<span class="text-xl font-bold sm:text-3xl">{siteConfig.title}</span>
 		</a>
 		<nav
 			aria-label="Main menu"
-			class="bg-global-bg absolute -inset-x-4 top-12 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-dashed sm:divide-accent sm:divide-y-0 sm:bg-transparent sm:p-0"
+			class="grid grid-cols-4 gap-y-2 text-accent"
 			id="navigation-menu"
 		>
 			{
 				menuLinks.map((link) => (
 					<a
 						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="text-accent px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:underline-offset-2 sm:hover:underline"
+						class="hover:underline"
 						href={link.path}
+						rel="prefetch"
 					>
 						{link.title}
 					</a>
@@ -56,45 +57,6 @@ import { siteConfig } from "../../site.config";
 	</div>
 	<Search />
 	<ThemeToggle />
-	<mobile-button>
-		<button
-			aria-expanded="false"
-			aria-haspopup="menu"
-			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
-			id="toggle-navigation-menu"
-			type="button"
-		>
-			<span class="sr-only">Open main menu</span>
-			<svg
-				aria-hidden="true"
-				class="absolute inset-s-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
-				fill="none"
-				focusable="false"
-				id="line-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path d="M3.75 9h16.5m-16.5 6.75h16.5" stroke-linecap="round" stroke-linejoin="round"
-				></path>
-			</svg>
-			<svg
-				aria-hidden="true"
-				class="text-accent absolute inset-s-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
-				class="text-accent"
-				fill="none"
-				focusable="false"
-				id="cross-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
-			</svg>
-		</button>
-	</mobile-button>
 </header>
 
 <script>

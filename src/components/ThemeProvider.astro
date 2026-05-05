@@ -14,14 +14,15 @@
 			);
 		}
 
-		const root = document.documentElement;
+	const root = document.documentElement;
 
 		// root already set to newTheme, exit early
 		if (newTheme === root.getAttribute("data-theme")) {
 			return;
 		}
 
-		root.setAttribute("data-theme", newTheme);
+	root.setAttribute("data-theme", newTheme);
+	root.classList.toggle("dark", newTheme === "dark");
 
 		if (typeof localStorage !== "undefined") {
 			localStorage.setItem("theme", newTheme);

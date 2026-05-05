@@ -5,12 +5,10 @@ import FormattedDate from "@/components/FormattedDate.astro";
 
 interface Props {
 	content: CollectionEntry<"post">;
-	readingTime: string;
 }
 
 const {
 	content: { data },
-	readingTime,
 } = Astro.props;
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
@@ -33,32 +31,19 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	)
 }
 {data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
-<h1 class="title">
+<h1 class="title mb-3 sm:mb-1">
 	{data.title}
 </h1>
-<div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-	<p class="font-semibold">
-		<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} /> /{" "}
-		{readingTime}
-	</p>
-	{
-		data.updatedDate && (
-			<span class="bg-quote/5 text-quote rounded-lg px-2 py-1">
-				Updated:
-				<FormattedDate class="ms-1" date={data.updatedDate} dateTimeOptions={dateTimeOptions} />
-			</span>
-		)
-	}
-</div>
+<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} />
 {
 	!!data.tags?.length && (
-		<div class="mt-2">
+		<div class="mt-1 sm:mt-0 sm:inline sm:before:content-['|']">
 			<svg
 				aria-hidden="true"
 				class="inline-block h-6 w-6"
 				fill="none"
 				focusable="false"
-				stroke="var(--color-muted)"
+				stroke="currentColor"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				stroke-width="1.5"
@@ -72,13 +57,17 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 			</svg>
 			{data.tags.map((tag, i) => (
 				<>
-					{/* prettier-ignore */}
-					<span class="contents">
-						<a class="cactus-link inline-block before:content-['#']" data-pagefind-filter={`tag:${tag}`} href={`/tags/${tag}/`}><span class="sr-only">View more blogs with the tag&nbsp;</span>{tag}
-						</a>{i < data.tags.length - 1 && ", "}
-					</span>
+					<a
+						class="cactus-link inline-block before:content-['#']"
+						data-pagefind-filter={`tag:${tag}`}
+						href={`/tags/${tag}/`}
+					>
+						{tag}
+					</a>
+					{i < data.tags.length - 1 && ", "}
 				</>
 			))}
 		</div>
 	)
 }
+{data.description && <p class="mt-8">{data.description}</p>}

@@ -26,5 +26,9 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<Note as="h1" note={note} />
+	<article class="flex-grow break-words">
+		<div class="prose prose-sm prose-cactus prose-headings:font-semibold max-w-none">
+			<Note as="h1" note={note} />
+		</div>
+	</article>
 </PageLayout>
