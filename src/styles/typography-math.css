@@ -39,12 +39,10 @@ prose-content {
 
 		.tml-right {
 			text-align: right;
-			text-align: -webkit-right;
 		}
 
 		.tml-left {
 			text-align: left;
-			text-align: -webkit-left;
 		}
 
 		mtd {

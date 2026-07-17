@@ -11,7 +11,7 @@ const authors = await getEntries(post.data.authors);
 
 <li>
 	{post.data.image && (
-      <a href={`/blog/${post.id}`} tabindex="-1" aria-hidden="true">
+        <a href={`/blog/${post.id}`} tabindex="-1" aria-hidden="true">
         <Image src={post.data.image} alt="" width={640} height={336} />
       </a>
     )}

@@ -210,6 +210,7 @@ input:where([type="button"], [type="reset"], [type="submit"]),
 }
 
 [hidden]:where(:not([hidden="until-found"])) {
+	/* biome-ignore lint/complexity/noImportantStyles: required for hidden elements */
 	display: none !important;
 }
 
@@ -217,9 +218,13 @@ input:where([type="button"], [type="reset"], [type="submit"]),
 	*,
 	::before,
 	::after {
+		/* biome-ignore lint/complexity/noImportantStyles: required for reduced motion */
 		animation-duration: 0.01ms !important;
+		/* biome-ignore lint/complexity/noImportantStyles: required for reduced motion */
 		animation-iteration-count: 1 !important;
+		/* biome-ignore lint/complexity/noImportantStyles: required for reduced motion */
 		transition-duration: 0.01ms !important;
+		/* biome-ignore lint/complexity/noImportantStyles: required for reduced motion */
 		scroll-behavior: auto !important;
 	}
 }

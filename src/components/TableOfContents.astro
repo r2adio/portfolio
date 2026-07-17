@@ -167,32 +167,6 @@ const { title, sections } = Astro.props;
 		}
 	}
 
-	nav > ul {
-		min-height: 0;
-		overflow-x: hidden;
-		overflow-y: auto;
-		overscroll-behavior: contain;
-		scrollbar-width: none;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
-
-		@media (width < 64rem) {
-			display: none;
-			position: absolute;
-			inset-block-start: 100%;
-			inset-inline: 0;
-			max-block-size: 30svh;
-		}
-	}
-
-	nav:has(input:checked) > ul {
-		@media (width < 64rem) {
-			display: flex;
-		}
-	}
-
 	ul {
 		display: flex;
 		flex-direction: column;
@@ -271,6 +245,32 @@ const { title, sections } = Astro.props;
 
 		li[data-depth="4"] {
 			--indent: 2;
+		}
+	}
+
+	nav > ul {
+		min-height: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		@media (width < 64rem) {
+			display: none;
+			position: absolute;
+			inset-block-start: 100%;
+			inset-inline: 0;
+			max-block-size: 30svh;
+		}
+	}
+
+	nav:has(input:checked) > ul {
+		@media (width < 64rem) {
+			display: flex;
 		}
 	}
 </style>
