@@ -1,15 +1,15 @@
-import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 import { satteri } from "@astrojs/markdown-satteri";
+import sitemap from "@astrojs/sitemap";
+import { defineConfig } from "astro/config";
+import { calloutDirective } from "./src/lib/callout";
 import {
 	blockExpressiveCode,
 	inlineExpressiveCode,
 } from "./src/lib/expressive-code";
-import { temmlMath } from "./src/lib/math";
-import { calloutDirective } from "./src/lib/callout";
 import { externalLinks } from "./src/lib/external-links";
-import { headingNamespace } from "./src/lib/heading-namespace";
 import { headingAnchors } from "./src/lib/heading-anchors";
+import { headingNamespace } from "./src/lib/heading-namespace";
+import { temmlMath } from "./src/lib/math";
 
 export default defineConfig({
 	site: "https://astro-erudite.vercel.app",

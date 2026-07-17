@@ -1,24 +1,24 @@
 ---
-import { getEntries, type CollectionEntry } from "astro:content"
-import { SITE } from "@/consts"
-import { pageTitle } from "@/lib/content"
+import { type CollectionEntry, getEntries } from "astro:content";
+import { SITE } from "@/consts";
+import { pageTitle } from "@/lib/content";
 
 type Props = {
-  post: CollectionEntry<"blog">
-  canonical?: string
-}
+	post: CollectionEntry<"blog">;
+	canonical?: string;
+};
 
-const { post, canonical: canonicalPath } = Astro.props
-const { title, description, date, image } = post.data
+const { post, canonical: canonicalPath } = Astro.props;
+const { title, description, date, image } = post.data;
 
-const base = Astro.site ?? new URL(Astro.url.origin)
-const authors = await getEntries(post.data.authors)
-const authorNames = authors.map((author) => author.data.name)
-const url = new URL(Astro.url.pathname, base)
-const canonical = new URL(canonicalPath ?? Astro.url.pathname, base)
+const base = Astro.site ?? new URL(Astro.url.origin);
+const authors = await getEntries(post.data.authors);
+const authorNames = authors.map((author) => author.data.name);
+const url = new URL(Astro.url.pathname, base);
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, base);
 const ogImage = image
-  ? new URL(image.src, base)
-  : new URL(SITE.defaultPostImage, base)
+	? new URL(image.src, base)
+	: new URL(SITE.defaultPostImage, base);
 ---
 
 <title>{pageTitle(title)}</title>

@@ -1,13 +1,13 @@
 ---
-import type { SvgComponent } from "astro/types"
+import type { SvgComponent } from "astro/types";
 
-type Props = { links: { href: string; label: string; icon: SvgComponent }[] }
+type Props = { links: { href: string; label: string; icon: SvgComponent }[] };
 
-const { links } = Astro.props
+const { links } = Astro.props;
 ---
 
 <ul>
-  {links.map(({ href, label, icon: Icon }) => (
+	{links.map(({ href, label, icon: Icon }) => (
       <li>
         <a
           href={href}
@@ -24,22 +24,22 @@ const { links } = Astro.props
 </ul>
 
 <style>
-  ul {
-    display: flex;
-    margin-inline: -0.5rem;
+	ul {
+		display: flex;
+		margin-inline: -0.5rem;
 
-    li a {
-      color: var(--muted-foreground);
-      text-decoration: none;
+		li a {
+			color: var(--muted-foreground);
+			text-decoration: none;
 
-      &:hover {
-        color: var(--foreground);
-      }
+			&:hover {
+				color: var(--foreground);
+			}
 
-      svg {
-        width: 1.125rem;
-        height: 1.125rem;
-      }
-    }
-  }
+			svg {
+				width: 1.125rem;
+				height: 1.125rem;
+			}
+		}
+	}
 </style>
