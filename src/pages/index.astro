@@ -1,18 +1,20 @@
 ---
 import MetaPage from "@/components/MetaPage.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout>
 	<MetaPage slot="head" />
 	<dictionary-entry>
-		<h1>Gaurav Vashisth</h1>
+		<h1><span>Gaurav Vashisth</span><ThemeToggle /></h1>
 		<!-- TODO: links to blogs projects authors, replacement of table of content on left -->
 		<hr> <!-- divider  -->
 		<prose-content>
 			<p>
-				I'm Gaurav (aka r2adio), and this is my personal blog. I'm interested in
-				career development, communications, and developer toolings.
+				I'm Gaurav (aka r2adio), and this is my personal blog. I'm a software
+				engineer working on backend services and AI. I'm interested in career
+				development, communications, and developer toolings.
 			</p>
 			<p>
 				<!-- TODO: list of my blogs -->
@@ -36,6 +38,9 @@ import Layout from "@/layouts/Layout.astro";
 		}
 
 		h1 {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 			font-size: var(--step-2);
 			line-height: calc(var(--leading-offset) + 1em);
 			font-weight: var(--font-weight-medium);
