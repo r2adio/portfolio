@@ -12,7 +12,7 @@ import { headingNamespace } from "./src/lib/heading-namespace";
 import { temmlMath } from "./src/lib/math";
 
 export default defineConfig({
-	site: "https://astro-erudite.vercel.app",
+	site: "https://r2adio.pages.dev",
 	compressHTML: true,
 	prefetch: { prefetchAll: true },
 	integrations: [

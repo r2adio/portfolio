@@ -5,8 +5,8 @@ import RSS from "@/assets/icons/rss.svg";
 import Twitter from "@/assets/icons/twitter.svg";
 
 export const SITE = {
-	title: "astro-erudite",
-	description: "An opinionated, unstyled blogging template built with Astro.",
+	title: "r2adio",
+	description: "Personal blogging and portfolio website.",
 	locale: "en-US",
 	dir: "ltr",
 	defaultPageImage: "/static/opengraph-image.png",
@@ -20,8 +20,8 @@ export const NAVIGATION = [
 ];
 
 export const SOCIALS: { href: string; label: string; icon: SvgComponent }[] = [
-	{ href: "https://github.com/jktrn", label: "GitHub", icon: GitHub },
-	{ href: "https://twitter.com/enscrbe", label: "Twitter", icon: Twitter },
-	{ href: "mailto:jason@enscribe.dev", label: "Email", icon: Email },
+	{ href: "https://github.com/r2adio", label: "GitHub", icon: GitHub },
+	{ href: "https://twitter.com/zeke_r2", label: "Twitter", icon: Twitter },
+	{ href: "mailto:miyamusashimoto1645@gmail.com", label: "Email", icon: Email },
 	{ href: "/rss.xml", label: "RSS", icon: RSS },
 ];
