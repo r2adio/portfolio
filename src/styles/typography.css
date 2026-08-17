@@ -15,7 +15,7 @@
 	--prose-foreground: color-mix(in oklab, var(--foreground) 80%, transparent);
 	--prose-marker: color-mix(in oklab, var(--foreground) 30%, transparent);
 
-	--measure: 40rem;
+	--measure: 43rem;
 }
 
 *,
