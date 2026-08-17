@@ -20,17 +20,29 @@ import MetaHead from "@/components/MetaHead.astro";
 import Sidebar from "@/components/Sidebar.astro";
 import { SITE } from "@/consts";
 
-type Props = { crumbs?: { label: string; href: string }[] };
+type Props = { crumbs?: { label: string; href: string }[]; home?: boolean };
 
-const { crumbs } = Astro.props;
+const { crumbs, home = false } = Astro.props;
 ---
 
 <html lang={SITE.locale} dir={SITE.dir}>
 	<MetaHead>
 		<slot name="head" />
 	</MetaHead>
+	<script is:inline>
+		(() => {
+			const root = document.documentElement;
+			const theme = localStorage.getItem("theme");
+			if (theme) {
+				root.dataset.theme = theme;
+			} else if (matchMedia("(prefers-color-scheme: dark)").matches) {
+				root.dataset.theme = "dark";
+			}
+		})();
+	</script>
 	<body>
-		<page-grid>
+		<page-grid data-home={home || undefined}>
+			{!home && (
 			<page-header>
 				<page-nav>
 					<Sidebar crumbs={crumbs}
@@ -41,9 +53,11 @@ const { crumbs } = Astro.props;
             <page-toc><slot name="toc" /></page-toc>
           )}
 			</page-header>
+			)}
 			<page-content>
 				<main><slot /></main>
-				<page-footer><Footer /></page-footer>
+				{home && <slot name="home-footer" />}
+				{!home && <page-footer><Footer /></page-footer>}
 			</page-content>
 		</page-grid>
 	</body>
@@ -117,7 +131,6 @@ const { crumbs } = Astro.props;
 		grid-column: 3 / 10;
 		grid-row: 1;
 		min-width: 0;
-		margin-block-start: -0.1em;
 
 		main {
 			flex: 1;
@@ -135,5 +148,27 @@ const { crumbs } = Astro.props;
 			max-inline-size: var(--measure);
 			margin-inline: auto;
 		}
+	}
+
+	page-grid[data-home] {
+		grid-template-columns: 1fr;
+		max-width: var(--measure);
+		padding-block: var(--space-l);
+		display: flex;
+		flex-direction: column;
+		min-height: 100svh;
+		color: var(--foreground);
+		background-color: var(--background);
+
+		@media (width < 64rem) {
+			padding-block: 0;
+		}
+	}
+
+	page-grid[data-home] page-content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		max-inline-size: 100%;
 	}
 </style>

@@ -1,82 +1,167 @@
 ---
 import MetaPage from "@/components/MetaPage.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
+import { SITE, SOCIALS } from "@/consts";
 import Layout from "@/layouts/Layout.astro";
+
+const posts = [
+	{
+		title: "Building a Personal Blog with Astro",
+		date: "2026 · 07",
+		href: "/blog/building-personal-blog-astro",
+	},
+	{
+		title: "Getting Started with AI-Powered Development",
+		date: "2026 · 05",
+		href: "/blog/getting-started-ai-development",
+	},
+	{
+		title: "My Journey into Backend Engineering",
+		date: "2026 · 03",
+		href: "/blog/journey-backend-engineering",
+	},
+	{
+		title: "Why I Chose Cloudflare Pages",
+		date: "2026 · 01",
+		href: "/blog/chose-cloudflare-pages",
+	},
+	{
+		title: "Lessons from My First Year in Tech",
+		date: "2025 · 11",
+		href: "/blog/first-year-tech",
+	},
+];
 ---
 
-<Layout>
+<Layout home>
 	<MetaPage slot="head" />
-	<dictionary-entry>
-		<h1><span>Gaurav Vashisth</span><ThemeToggle /></h1>
-		<!-- TODO: links to blogs projects authors, replacement of table of content on left -->
-		<hr> <!-- divider  -->
-		<prose-content>
-			<p>
-				I'm Gaurav (aka r2adio), and this is my personal blog. I'm a software
-				engineer working on backend services and AI. I'm interested in career
-				development, communications, and developer toolings.
-			</p>
-			<p>
-				<!-- TODO: list of my blogs -->
-			</p>
-		</prose-content>
-	</dictionary-entry>
+	<header>
+		<nav>
+			<a href="/" class="site-name">{SITE.title}</a>
+			<div class="nav-right">
+				<ThemeToggle />
+			</div>
+		</nav>
+	</header>
+
+	<main class="home-content">
+		<p class="bio">
+			I'm Gaurav (aka r2adio), and this is my personal blog. I'm a software
+			engineer working on backend services and AI. I'm interested in career
+			development, communications, and developer toolings.
+		</p>
+
+		<div class="post-list">
+			{posts.map((post) => (
+				<div class="post-item">
+					<span class="post-title">
+						<a href={post.href}>{post.title}</a>
+					</span>
+					<span class="post-date">{post.date}</span>
+				</div>
+			))}
+		</div>
+	</main>
+
+	<page-footer slot="home-footer" class="home-footer">
+		{SOCIALS.map((link) => (
+			<a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+				{link.label}
+			</a>
+		))}
+	</page-footer>
 </Layout>
 
 <style>
-	dictionary-entry {
-		display: block;
+	header {
+		margin-block-end: var(--space-xl);
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.site-name {
+		font-weight: var(--font-weight-medium);
+		text-decoration: none;
+		color: var(--foreground);
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	.nav-right {
+		display: flex;
+		align-items: center;
+	}
+
+	.home-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xl);
+	}
+
+	.bio {
 		font-size: var(--step-0);
-		color: var(--muted-foreground);
+		line-height: calc(var(--leading-offset) + 1em);
+		color: var(--foreground);
+	}
 
-		@media (width >= 64rem) {
-			margin-block-start: -0.2em;
-		}
+	.post-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+	}
 
-		ipa-span {
-			opacity: 0.6;
-		}
+	.post-item {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3xs);
+	}
 
-		h1 {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			font-size: var(--step-2);
-			line-height: calc(var(--leading-offset) + 1em);
-			font-weight: var(--font-weight-medium);
+	.post-title {
+		font-size: var(--step-0);
+		line-height: calc(var(--leading-offset) + 1em);
+
+		a {
 			color: var(--foreground);
-			margin-block-end: var(--space-2xs);
-		}
+			text-decoration: underline;
+			text-decoration-color: var(--muted-foreground);
+			text-decoration-thickness: max(1px, 0.0625em);
+			text-underline-offset: -0.06em;
 
-		ol {
-			margin-block-start: var(--space-xs);
-			list-style: none;
-
-			li {
-				padding-inline-start: 1em;
-				text-indent: -1em;
-
-				&::before {
-					content: counter(list-item);
-					display: inline-block;
-					inline-size: 1em;
-					text-indent: 0;
-					font-weight: var(--font-weight-medium);
-				}
-
-				+ li {
-					margin-block-start: var(--space-3xs);
-				}
+			&:hover {
+				text-decoration-color: currentColor;
 			}
 		}
+	}
 
-		hr {
-			margin-block: var(--space-m);
-			border-block-start: 2px solid var(--border);
-		}
+	.post-date {
+		font-family: var(--font-mono);
+		font-size: var(--step--1);
+		color: var(--muted-foreground);
+		white-space: nowrap;
+	}
 
-		prose-content {
-			margin-block-start: var(--space-xs);
+	.home-footer {
+		display: flex;
+		align-items: center;
+		gap: var(--space-s);
+		padding-block: var(--space-m) 0;
+
+		a {
+			font-size: var(--step--1);
+			color: var(--muted-foreground);
+			text-decoration: underline;
+			text-decoration-color: var(--muted-foreground);
+
+			&:hover {
+				color: var(--foreground);
+				text-decoration-color: currentColor;
+			}
 		}
 	}
 </style>
