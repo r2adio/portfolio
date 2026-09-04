@@ -1,0 +1,45 @@
+---
+import { render } from "astro:content";
+import MetaPost from "@/components/MetaPost.astro";
+import TableOfContents from "@/components/TableOfContents.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getPosts } from "@/lib/content";
+
+export async function getStaticPaths() {
+	const posts = await getPosts();
+	return posts.map((post) => ({
+		params: { slug: post.id.split("/").join("/") },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const sections = [];
+let current = null;
+for (const heading of headings) {
+	if (heading.depth === 2) {
+		current = { id: undefined, label: heading.text, headings: [] };
+		sections.push(current);
+	} else if (heading.depth === 3 && current) {
+		current.headings.push(heading);
+	}
+}
+---
+
+<Layout>
+	<MetaPost slot="head" post={post} />
+	{headings.length > 0 && (
+		<TableOfContents slot="toc" title={post.data.title} sections={sections} />
+	)}
+	<article>
+		<header>
+			<h1>{post.data.title}</h1>
+			<p class="post-desc">{post.data.description}</p>
+		</header>
+		<prose-content>
+			<Content />
+		</prose-content>
+	</article>
+</Layout>

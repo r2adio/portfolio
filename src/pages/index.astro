@@ -1,49 +1,19 @@
 ---
 import MetaPage from "@/components/MetaPage.astro";
-import ThemeToggle from "@/components/ThemeToggle.astro";
-import { SITE, SOCIALS } from "@/consts";
+import { SOCIALS } from "@/consts";
 import Layout from "@/layouts/Layout.astro";
 
 const posts = [
 	{
-		title: "Building a Personal Blog with Astro",
-		date: "2026 · 07",
-		href: "/blog/building-personal-blog-astro",
-	},
-	{
-		title: "Getting Started with AI-Powered Development",
-		date: "2026 · 05",
-		href: "/blog/getting-started-ai-development",
-	},
-	{
-		title: "My Journey into Backend Engineering",
-		date: "2026 · 03",
-		href: "/blog/journey-backend-engineering",
-	},
-	{
-		title: "Why I Chose Cloudflare Pages",
-		date: "2026 · 01",
-		href: "/blog/chose-cloudflare-pages",
-	},
-	{
-		title: "Lessons from My First Year in Tech",
-		date: "2025 · 11",
-		href: "/blog/first-year-tech",
+		title: "xmenu - dmenu without x11",
+		date: "2026 · 09",
+		href: "/blog/xmenu-dmenu-without-x11",
 	},
 ];
 ---
 
 <Layout home>
 	<MetaPage slot="head" />
-	<header>
-		<nav>
-			<a href="/" class="site-name">{SITE.title}</a>
-			<div class="nav-right">
-				<ThemeToggle />
-			</div>
-		</nav>
-	</header>
-
 	<main class="home-content">
 		<p class="bio">
 			I'm Gaurav (aka r2adio), and this is my personal blog. I'm a software
@@ -73,31 +43,6 @@ const posts = [
 </Layout>
 
 <style>
-	header {
-		margin-block-end: var(--space-xl);
-	}
-
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	.site-name {
-		font-weight: var(--font-weight-medium);
-		text-decoration: none;
-		color: var(--foreground);
-
-		&:hover {
-			text-decoration: none;
-		}
-	}
-
-	.nav-right {
-		display: flex;
-		align-items: center;
-	}
-
 	.home-content {
 		display: flex;
 		flex-direction: column;

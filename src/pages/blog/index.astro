@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BlogCard from "@/components/BlogCard.astro";
+import MetaPage from "@/components/MetaPage.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getPosts, pageTitle } from "@/lib/content";
+
+const posts = await getPosts();
+---
+
+<Layout crumbs={[{ label: "Blog", href: "/blog" }]}>
+	<MetaPage slot="head" title={pageTitle("Blog")} />
+	<prose-content>
+		<h1>Blog</h1>
+		<p>Writing about software, Linux, and developer tooling.</p>
+	</prose-content>
+	<ul class="post-list">
+		{posts.map((post: CollectionEntry<"blog">) => <BlogCard post={post} />)}
+	</ul>
+</Layout>
