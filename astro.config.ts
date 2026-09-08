@@ -1,6 +1,6 @@
 import { satteri } from "@astrojs/markdown-satteri";
 import sitemap from "@astrojs/sitemap";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import { calloutDirective } from "./src/lib/callout";
 import {
 	blockExpressiveCode,
@@ -15,6 +15,24 @@ export default defineConfig({
 	site: "https://r2adio.pages.dev",
 	compressHTML: true,
 	prefetch: { prefetchAll: true },
+	fonts: [
+		{
+			provider: fontProviders.google(),
+			name: "Inter",
+			cssVariable: "--font-inter",
+			weights: ["100 900"],
+			styles: ["normal", "italic"],
+			fallbacks: ["sans-serif"],
+		},
+		{
+			provider: fontProviders.google(),
+			name: "JetBrains Mono",
+			cssVariable: "--font-jetbrains-mono",
+			weights: ["100 800"],
+			styles: ["normal", "italic"],
+			fallbacks: ["monospace"],
+		},
+	],
 	integrations: [
 		sitemap({
 			filter: (page) =>
