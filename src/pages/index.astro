@@ -16,9 +16,12 @@ const posts = [
 	<MetaPage slot="head" />
 	<main class="home-content">
 		<p class="bio">
-			I'm Gaurav (aka r2adio), and this is my personal blog. I'm a software
-			engineer working on backend services and AI. I'm interested in career
-			development, communications, and developer toolings.
+			Hi! I'm Gaurav Vashisth (aka r2adio), a software engineer based in Delhi.
+			I write about things I'm interested in, mostly ML/AI, backend systems, and
+			DevOps. You can reach me at
+			<a href="mailto:gauravvashisth365@gmail.com"
+				>gauravvashisth365@gmail.com</a
+			>.
 		</p>
 
 		<div class="post-list">
@@ -53,6 +56,19 @@ const posts = [
 		font-size: var(--step-0);
 		line-height: calc(var(--leading-offset) + 1em);
 		color: var(--prose-foreground);
+
+		a {
+			color: var(--link);
+			text-decoration: underline;
+			text-decoration-color: var(--link);
+			text-decoration-thickness: max(1px, 0.0625em);
+			text-underline-offset: -0.06em;
+
+			&:hover {
+				color: var(--foreground);
+				text-decoration-color: var(--foreground);
+			}
+		}
 	}
 
 	.post-list {
@@ -72,14 +88,15 @@ const posts = [
 		line-height: calc(var(--leading-offset) + 1em);
 
 		a {
-			color: var(--foreground);
+			color: var(--link);
 			text-decoration: underline;
-			text-decoration-color: var(--muted-foreground);
+			text-decoration-color: var(--link);
 			text-decoration-thickness: max(1px, 0.0625em);
 			text-underline-offset: -0.06em;
 
 			&:hover {
-				text-decoration-color: currentColor;
+				color: var(--foreground);
+				text-decoration-color: var(--foreground);
 			}
 		}
 	}
