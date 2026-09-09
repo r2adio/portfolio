@@ -18,7 +18,7 @@ import "@/styles/shape.css";
 import Footer from "@/components/Footer.astro";
 import MetaHead from "@/components/MetaHead.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
-import { SITE } from "@/consts";
+import { NAVIGATION, SITE } from "@/consts";
 
 type Props = { crumbs?: { label: string; href: string }[]; home?: boolean };
 
@@ -45,6 +45,11 @@ const { home = false } = Astro.props;
 			<page-header>
 				<nav>
 					<a href="/" class="site-name">{SITE.title}</a>
+					<div class="nav-links">
+						{NAVIGATION.map((link) => (
+							<a href={link.href}>{link.label}</a>
+						))}
+					</div>
 					<div class="nav-right">
 						<ThemeToggle />
 						{!home && <slot name="actions" />}
@@ -98,6 +103,22 @@ const { home = false } = Astro.props;
 
 		&:hover {
 			text-decoration: none;
+		}
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: var(--space-s);
+
+		a {
+			font-size: var(--step--1);
+			color: var(--muted-foreground);
+			text-decoration: none;
+
+			&:hover {
+				color: var(--foreground);
+			}
 		}
 	}
 
