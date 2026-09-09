@@ -3,8 +3,6 @@ title: "xmenu - dmenu without x11"
 description: "A look at xmenu, a dmenu alternative that works without X11."
 date: 2026-09-08
 tags: ["xmenu", "linux", "tooling"]
-authors:
-  - "r2adio"
 ---
 
 Welcome to this blog post about **xmenu - dmenu without x11**.

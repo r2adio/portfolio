@@ -1,0 +1,66 @@
+---
+import MetaPage from "@/components/MetaPage.astro";
+import Layout from "@/layouts/Layout.astro";
+import { pageTitle } from "@/lib/content";
+
+const projects = [
+	{
+		name: "torq",
+		description: "Bit-torrent client for terminal",
+		link: "https://github.com/r2adio/torq.git",
+	},
+];
+---
+
+<Layout crumbs={[{ label: "Projects", href: "/projects" }]}>
+	<MetaPage slot="head" title={pageTitle("Projects")} />
+	<prose-content>
+		<h1>Projects</h1>
+		<p>Things I've built and worked on.</p>
+	</prose-content>
+	<ul class="project-list">
+		{projects.map((project) => (
+			<li class="project-item">
+				<a href={project.link} target="_blank" rel="noopener noreferrer">{project.name}</a>
+				<span class="project-meta">
+					<span class="project-desc">{project.description}</span>
+				</span>
+			</li>
+		))}
+	</ul>
+</Layout>
+
+<style>
+	.project-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+	}
+
+	.project-item {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3xs);
+
+		> a {
+			font-size: var(--step-1);
+			line-height: calc(var(--leading-offset) + 1em);
+			font-weight: var(--font-weight-medium);
+			color: var(--link);
+			text-decoration: underline;
+			text-decoration-color: var(--link);
+			text-decoration-thickness: max(1px, 0.0625em);
+			text-underline-offset: -0.06em;
+
+			&:hover {
+				color: var(--foreground);
+				text-decoration-color: var(--foreground);
+			}
+		}
+	}
+
+	.project-meta {
+		font-size: var(--step--1);
+		color: var(--muted-foreground);
+	}
+</style>
