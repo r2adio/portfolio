@@ -20,7 +20,12 @@ const sections = [];
 let current = null;
 for (const heading of headings) {
 	if (heading.depth === 2) {
-		current = { id: undefined, label: heading.text, headings: [] };
+		current = {
+			id: heading.slug,
+			label: heading.text,
+			open: true,
+			headings: [],
+		};
 		sections.push(current);
 	} else if (heading.depth === 3 && current) {
 		current.headings.push(heading);
@@ -30,7 +35,7 @@ for (const heading of headings) {
 
 <Layout>
 	<MetaPost slot="head" post={post} />
-	{headings.length > 0 && (
+	{sections.length > 0 && (
 		<TableOfContents slot="toc" title={post.data.title} sections={sections} />
 	)}
 	<article>
