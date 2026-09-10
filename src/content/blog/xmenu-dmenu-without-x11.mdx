@@ -1,0 +1,91 @@
+---
+title: "xmenu - dmenu without x11"
+description: "A look at xmenu, a dmenu alternative that works without X11."
+date: 2026-09-08
+tags: ["xmenu", "linux", "tooling"]
+---
+
+{/*
+  Example post to learn how to author MDX here.
+
+  Frontmatter (title, description, date, tags, ...) is defined above. The schema in
+  `src/content.config.ts` also allows `image`, `order`, and `draft`. Frontmatter is
+  available in the body as the `frontmatter` object — note its values are the raw
+  YAML ones, so `date` is a string, not a `Date`.
+*/}
+
+export const version = "0.5.0";
+
+`xmenu` is a lightweight menu utility inspired by `dmenu`. Unlike `dmenu`, it does
+not depend on X11, so it runs on Wayland and other non-X environments.
+
+MDX lets you use JSX and exported values inline. This post is about
+{`xmenu v${version}`} and was published on
+{new Date(frontmatter.date).toDateString()}.
+
+## What is xmenu
+
+`xmenu` renders a menu of items to standard output. You pipe a list of entries in,
+it shows a menu, and prints the selected line back — classic `dmenu` behaviour,
+but without the X11 dependency. The exported `version` above renders inline here
+too: {version}.
+
+### How it differs from dmenu
+
+- No X11 or XWayland dependency.
+- Pairs well with Wayland compositors such as `sway` or `hyprland`.
+- Keeps the same keyboard-driven workflow.
+
+## A note on writing posts
+
+:::note
+Headings in the body start at `##`. The page title is already an `<h1>` from
+frontmatter, so leaf sections below should use `###` (h3), never `#`.
+:::
+
+:::warning[Check the config]
+Callouts like this one, `$...$` / `$$...$$` math, and expressive code frames are
+all wired up in `astro.config.ts`.
+:::
+
+## Installation
+
+Build it from source and put the binary on your `PATH`:
+
+```sh title="install-xmenu.sh"
+git clone https://github.com/example/xmenu
+cd xmenu
+make && sudo make install
+```
+
+A small TypeScript example, with line numbers enabled:
+
+```ts title="examples/launcher.ts"
+import { pick, run } from "./xmenu";
+
+const items = ["firefox", "kitty", "code"];
+const choice = await pick(items, { prompt: "run:" });
+
+if (choice) {
+  await run(choice.split(/\s+/)[0]);
+}
+```
+
+## Math
+
+Inline math renders with Temml: $E = mc^2$. Display math uses a block:
+
+$$
+\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}
+$$
+
+## Current status
+
+| Field   | Value                     |
+| ------- | ------------------------- |
+| Input   | line-based menu entries   |
+| Output  | selected entry to stdout  |
+| Deps    | none (no X11)             |
+| License | MIT                       |
+
+> Stay tuned for the full write-up.

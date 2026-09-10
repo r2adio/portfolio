@@ -1,4 +1,5 @@
 import { satteri } from "@astrojs/markdown-satteri";
+import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, fontProviders } from "astro/config";
 import { calloutDirective } from "./src/lib/callout";
@@ -39,6 +40,7 @@ export default defineConfig({
 				!/\/blog\/[^/]+\/[^/]+\/?$/.test(page) &&
 				!page.includes("/tags/"),
 		}),
+		mdx(),
 	],
 	markdown: {
 		syntaxHighlight: false,

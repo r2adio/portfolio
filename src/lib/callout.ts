@@ -65,7 +65,12 @@ export const calloutDirective = defineMdastPlugin({
 
 		const closed = !!node.attributes && "closed" in node.attributes;
 
-		ctx.prependChild(node, { type: "html", value: summary });
+		ctx.prependChild(
+			node,
+			ctx.sourceFormat === "mdx"
+				? { raw: summary, mdxExpressions: false }
+				: { type: "html", value: summary },
+		);
 		ctx.setProperty(node, "data", {
 			hName: "details",
 			hProperties: {

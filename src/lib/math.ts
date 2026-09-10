@@ -8,6 +8,8 @@ export const temmlMath = defineMdastPlugin({
 	inlineMath(node, ctx) {
 		try {
 			const value = temml.renderToString(node.value, { throwOnError: false });
+			if (ctx.sourceFormat === "mdx")
+				return { raw: value, mdxExpressions: false };
 			return { type: "html", value };
 		} catch (error) {
 			ctx.report({
@@ -19,11 +21,13 @@ export const temmlMath = defineMdastPlugin({
 	},
 	math(node, ctx) {
 		try {
-			const value = temml.renderToString(node.value, {
+			const value = `<math-display>${temml.renderToString(node.value, {
 				displayMode: true,
 				throwOnError: false,
-			});
-			return { type: "html", value: `<math-display>${value}</math-display>` };
+			})}</math-display>`;
+			if (ctx.sourceFormat === "mdx")
+				return { raw: value, mdxExpressions: false };
+			return { type: "html", value };
 		} catch (error) {
 			ctx.report({
 				message: `temml-math: failed on \`${node.value}\`: ${err(error)}`,

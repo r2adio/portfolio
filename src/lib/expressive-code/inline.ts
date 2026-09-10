@@ -2,7 +2,6 @@ import type { ElementContent } from "hast";
 import { select } from "hast-util-select";
 import { toHtml } from "hast-util-to-html";
 import { h } from "hastscript";
-import type { Html } from "mdast";
 import { defineMdastPlugin } from "satteri";
 import {
 	type ExpressiveCode,
@@ -75,7 +74,9 @@ export const inlineExpressiveCode = defineMdastPlugin({
 				annotation.kind === "lang" ? annotation.lang : undefined;
 
 			const value = toHtml(h("code", { dataEc: "", dataLanguage }, tokens));
-			return { type: "html", value } satisfies Html;
+			if (ctx.sourceFormat === "mdx")
+				return { raw: value, mdxExpressions: false };
+			return { type: "html", value };
 		} catch (error) {
 			const reason = error instanceof Error ? error.message : String(error);
 			ctx.report({

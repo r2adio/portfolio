@@ -4,7 +4,7 @@ import { z } from "astro/zod";
 
 const blog = defineCollection({
 	loader: glob({
-		pattern: "**/[^_]*.md",
+		pattern: "**/[^_]*.{md,mdx}", // ignores _*.{md,mdx}
 		base: "./src/content/blog",
 	}),
 	schema: ({ image }) =>
@@ -21,7 +21,7 @@ const blog = defineCollection({
 
 const projects = defineCollection({
 	loader: glob({
-		pattern: "**/[^_]*.md",
+		pattern: "**/[^_]*.{md,mdx}", // ignores _*.{md,mdx}
 		base: "./src/content/projects",
 	}),
 	schema: ({ image }) =>
@@ -36,4 +36,4 @@ const projects = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+export const collections = { blog }; // TODO: export projects and find use case
