@@ -77,6 +77,12 @@ const { home = false } = Astro.props;
 		padding-block: 0 var(--space-l);
 		color: var(--foreground);
 		background-color: var(--background);
+
+		@media (width >= 64rem) {
+			&:has(page-toc) {
+				max-width: var(--grid-max-width);
+			}
+		}
 	}
 
 	page-header {
@@ -94,6 +100,13 @@ const { home = false } = Astro.props;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+	}
+
+	@media (width >= 64rem) {
+		page-grid:has(page-toc) > page-header nav {
+			max-width: var(--measure);
+			margin-inline: auto;
+		}
 	}
 
 	.site-name {
@@ -128,6 +141,15 @@ const { home = false } = Astro.props;
 		gap: var(--space-2xs);
 	}
 
+	page-toc {
+		display: block;
+		margin-block-end: var(--space-s);
+
+		@media (width >= 64rem) {
+			margin-block-end: 0;
+		}
+	}
+
 	page-content {
 		display: flex;
 		flex-direction: column;
@@ -142,10 +164,40 @@ const { home = false } = Astro.props;
 			display: block;
 			margin-block-start: var(--space-xl);
 		}
+
+		@media (width >= 64rem) {
+			&:has(> page-toc) {
+				display: grid;
+				grid-template-columns:
+					minmax(0, var(--measure))
+					clamp(14rem, 20vw, 16rem);
+				grid-template-areas:
+					"main toc"
+					"footer footer";
+				justify-content: center;
+				column-gap: var(--space-l);
+
+				> main {
+					grid-area: main;
+					min-width: 0;
+				}
+
+				> page-toc {
+					grid-area: toc;
+				}
+
+				> page-footer {
+					grid-area: footer;
+				}
+			}
+		}
 	}
 
-	page-toc {
-		display: block;
-		margin-block-end: var(--space-s);
+	@media (width >= 64rem) {
+		page-grid:has(page-toc) page-footer footer {
+			width: 100%;
+			max-width: var(--measure);
+			margin-inline: auto;
+		}
 	}
 </style>
